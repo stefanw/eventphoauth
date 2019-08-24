@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from .models import Challenge
 from .utils import create_user_and_login
 from .forms import StartChallengeForm
+from .callout_views import start_call
 
 
 def start(request):
@@ -13,6 +14,8 @@ def start(request):
                 username=form.cleaned_data['username'],
                 state=request.POST.get('next', '')
             )
+            if request.GET.get('callout') is not None:
+                start_call(challenge)
             return redirect(challenge)
     else:
         form = StartChallengeForm()
@@ -28,7 +31,8 @@ def challenge(request, challenge_uuid):
     if challenge.solved:
         if not request.user.is_authenticated:
             create_user_and_login(request, challenge)
-        return redirect(challenge.state)
+        if challenge.state:
+            return redirect(challenge.state)
     return render(request, 'dectauth/challenge.html', {
         'challenge': challenge
     })

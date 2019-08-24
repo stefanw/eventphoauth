@@ -6,3 +6,4 @@ djangorestframework
 uvicorn
 dj-database-url
 whitenoise
+twilio
