@@ -34,7 +34,7 @@ class Challenge(models.Model):
         ordering = ('-created',)
 
     def __str__(self):
-        return self.uuid
+        return '{username}: {key}'.format(username=self.username, key=self.key)
 
     def get_absolute_url(self):
         return reverse('dectauth:challenge', kwargs={
