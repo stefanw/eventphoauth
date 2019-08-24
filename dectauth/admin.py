@@ -5,10 +5,7 @@ from django.urls import reverse
 from django.conf.urls import url
 from django.utils.html import format_html
 
-from asgiref.sync import async_to_sync
-
-from channels.layers import get_channel_layer
-
+from .utils import solve_challenge
 from .models import Challenge
 
 
@@ -33,12 +30,8 @@ class ChallengeAdmin(admin.ModelAdmin):
         return custom_urls + urls
 
     def solve_challenge(self, request, queryset):
-        channel_layer = get_channel_layer()
-        queryset.update(solved=True, last_seen=timezone.now())
         for challenge in queryset:
-            async_to_sync(channel_layer.group_send)(
-                str(challenge.uuid), {"type": "solved"}
-            )
+            solve_challenge(challenge)
 
     def mark_solved_button(self, obj):
         if obj.solved:
