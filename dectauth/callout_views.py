@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 from twilio.rest import Client
 from twilio.twiml.voice_response import VoiceResponse, Gather
@@ -28,6 +29,7 @@ def start_call(challenge):
     return call
 
 
+@csrf_exempt
 def challenge_voice_response(request, challenge_uuid):
     challenge = get_object_or_404(Challenge, uuid=challenge_uuid)
 
@@ -51,6 +53,7 @@ def challenge_voice_response(request, challenge_uuid):
     return HttpResponse(str(resp))
 
 
+@csrf_exempt
 def challenge_gather_input(request, challenge_uuid):
     """Processes results from the <Gather> prompt in /voice"""
 
