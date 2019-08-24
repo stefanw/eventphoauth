@@ -1,0 +1,19 @@
+{% extends "dectauth/base.html" %}
+
+{% load static %}
+
+{% block body_attrs %}data-challenge="{{ challenge.uuid }}"{% endblock %}
+
+{% block body_tag %}
+
+<p>Please call DECT number 5644 (LOGI) now and give the operator the following key:</p>
+
+<code>{{ challenge.key }}</code>
+
+<p>Waiting for your call now...</p>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/challenge.js' %}"></script>
+{% endblock %}

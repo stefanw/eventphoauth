@@ -1,0 +1,8 @@
+Django
+django-oauth-toolkit==1.2.0
+channels
+channels_redis
+djangorestframework
+uvicorn
+dj-database-url
+whitenoise

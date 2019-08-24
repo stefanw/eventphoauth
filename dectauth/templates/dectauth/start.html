@@ -1,0 +1,16 @@
+{% extends "dectauth/base.html" %}
+
+{% block body_tag %}
+
+<p>
+You will need to call a phone number from your DECT phone to start the authorization procedure.
+</p>
+
+<form action="" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}"/>
+  {{ form.as_p }}
+  <button type="submit">Start DECT Auth process</button>
+</form>
+
+{% endblock %}

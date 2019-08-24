@@ -1,0 +1,18 @@
+{% load static %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+  <meta charset="utf-8">
+  <meta name="language" content="{{ LANGUAGE_CODE }}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Dect auth</title>
+  {% block css %}
+  {% endblock %}
+</head>
+<body {% block body_attrs %}{% endblock %}>
+  {% block body_tag %}{% endblock %}
+
+  {% block js %}{% endblock %}
+
+</body>
+</html>
