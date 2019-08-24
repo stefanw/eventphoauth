@@ -30,7 +30,7 @@ class ChallengeConsumer(AsyncJsonWebsocketConsumer):
 
     # Receive message from WebSocket
     async def receive_json(self, content):
-        if content['type'] == 'hearbeat':
+        if content['type'] == 'heartbeat':
             await heartbeat_challenge(self.challenge_uuid)
             return
 
